@@ -16,6 +16,7 @@ export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState<
     "volunteer" | "contact" | "job" | "addjob"
   >("volunteer");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [user, setUser] = useState<any>(null);
 
   const signOutUser = async () => {

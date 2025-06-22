@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { LogIn } from "lucide-react";
 import { useRouter } from "next/navigation"; // If using App Router
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { auth, app } from "../api/firebase";
 import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 

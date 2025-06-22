@@ -6,6 +6,7 @@ import { db } from "@/app/api/firebase";
 import { collection, getDocs, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function Careers() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [jobs, setJobs] = useState<any[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedJob, setSelectedJob] = useState<string | null>(null);
