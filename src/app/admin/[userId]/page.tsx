@@ -1,5 +1,3 @@
-// "use client";
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -23,7 +21,7 @@ export default function AdminDashboard() {
     try {
       await signOut(auth);
       setUser(null);
-      router.push("/admin"); // Add redirect after logout
+      router.push("/../admin");
     } catch (error) {
       console.error("Sign out error:", error);
     }
