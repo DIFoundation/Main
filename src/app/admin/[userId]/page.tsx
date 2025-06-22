@@ -21,7 +21,7 @@ export default function AdminDashboard() {
     try {
       await signOut(auth);
       setUser(null);
-      router.push("/../admin");
+      router.push("../admin");
     } catch (error) {
       console.error("Sign out error:", error);
     }
