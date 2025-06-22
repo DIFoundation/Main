@@ -18,16 +18,20 @@ export default function AdminDashboard() {
   const [user, setUser] = useState<any>(null);
 
   const signOutUser = async () => {
+    if (!auth) return;
+
     try {
       await signOut(auth);
       setUser(null);
-      router.push("../admin");
+      router.push("/admin");
     } catch (error) {
       console.error("Sign out error:", error);
     }
   };
 
   useEffect(() => {
+    if (!auth) return;
+
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (!firebaseUser) {
         setUser(null);
