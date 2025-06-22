@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import VolunteerSubmissions from "@/components/VolunteerSubmissions";
-import ContactMessages from "@/components/ContactMessages";
-import JobApplications from "@/components/JobApplications";
+//  import VolunteerSubmissions from "@/components/VolunteerSubmissions";
+//  import ContactMessages from "@/components/ContactMessages";
+//  import JobApplications from "@/components/JobApplications";
 import { useRouter } from "next/navigation";
 import { auth } from "@/app/api/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import AddJobForm from "@/components/AddJobForm";
+//  import AddJobForm from "@/components/AddJobForm";
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -107,28 +107,28 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-semibold mb-4">
               Volunteer Submissions
             </h2>
-            {activeTab === "volunteer" && <VolunteerSubmissions />}
+            {/* {activeTab === "volunteer" && <VolunteerSubmissions />} */}
           </div>
         )}
 
         {activeTab === "contact" && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Contact Messages</h2>
-            {activeTab === "contact" && <ContactMessages />}
+            {/* {activeTab === "contact" && <ContactMessages />} */}
           </div>
         )}
 
         {activeTab === "job" && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Job Applications</h2>
-            {activeTab === "job" && <JobApplications />}
+            {/* {activeTab === "job" && <JobApplications />} */}
           </div>
         )}
 
         {activeTab === "addjob" && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Post a New Job</h2>
-            <AddJobForm />
+            {/* <AddJobForm /> */}
           </div>
         )}
       </div>
