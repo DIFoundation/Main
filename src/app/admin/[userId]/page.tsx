@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-//  import VolunteerSubmissions from "@/components/VolunteerSubmissions";
-//  import ContactMessages from "@/components/ContactMessages";
-//  import JobApplications from "@/components/JobApplications";
+import VolunteerSubmissions from "@/components/VolunteerSubmissions";
+import ContactMessages from "@/components/ContactMessages";
+import JobApplications from "@/components/JobApplications";
 import { useRouter } from "next/navigation";
 import { auth } from "@/app/api/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -18,8 +18,6 @@ export default function AdminDashboard() {
   const [user, setUser] = useState<any>(null);
 
   const signOutUser = async () => {
-    if (!auth) return;
-
     try {
       await signOut(auth);
       setUser(null);
@@ -30,8 +28,6 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    if (!auth) return;
-
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (!firebaseUser) {
         setUser(null);
@@ -111,21 +107,21 @@ export default function AdminDashboard() {
             <h2 className="text-xl font-semibold mb-4">
               Volunteer Submissions
             </h2>
-            {/* {activeTab === "volunteer" && <VolunteerSubmissions />} */}
+            {activeTab === "volunteer" && <VolunteerSubmissions />}
           </div>
         )}
 
         {activeTab === "contact" && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Contact Messages</h2>
-            {/* {activeTab === "contact" && <ContactMessages />} */}
+            {activeTab === "contact" && <ContactMessages />}
           </div>
         )}
 
         {activeTab === "job" && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Job Applications</h2>
-            {/* {activeTab === "job" && <JobApplications />} */}
+            {activeTab === "job" && <JobApplications />}
           </div>
         )}
 

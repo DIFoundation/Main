@@ -24,8 +24,6 @@ export default function Admin() {
     console.log("Form Data:", formData);
 
     try {
-       if (!auth) return;
-
       const userCredential = await signInWithEmailAndPassword(
         auth,
         formData.email,
@@ -43,8 +41,6 @@ export default function Admin() {
   };
 
   useEffect(() => {
-     if (!auth) return;
-     
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("User is already signed in:", user);
