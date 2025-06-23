@@ -7,7 +7,7 @@ import JobApplications from "@/components/JobApplications";
 import { useRouter } from "next/navigation";
 import { auth } from "@/app/api/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-//  import AddJobForm from "@/components/AddJobForm";
+import AddJobForm from "@/components/AddJobForm";
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -40,10 +40,10 @@ export default function AdminDashboard() {
     return () => unsubscribe();
   }, [router]);
 
-  if (!user) return <p>Loading...</p>;
+  if (!user) return <p className="flex h-screen justify-center cente">Loading...</p>;
 
   return (
-    <div className="w-full mx-auto py-8 px-4">
+    <div className="w-full h-screen mx-auto py-8 px-4">
       <div className="p-6 flex flex-row items-center justify-between bg-white mb-6">
         <h2 className="text-2xl font-bold mb-2">Welcome, {user.email}</h2>
 
@@ -128,7 +128,7 @@ export default function AdminDashboard() {
         {activeTab === "addjob" && (
           <div>
             <h2 className="text-xl font-semibold mb-4">Post a New Job</h2>
-            {/* <AddJobForm /> */}
+            <AddJobForm />
           </div>
         )}
       </div>

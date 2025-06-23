@@ -101,7 +101,7 @@ export default function Careers() {
   };
 
   return (
-    <section className="max-w-4xl mx-auto py-10 px-4 md:px-8">
+    <section className="max-w-4xl h-screen mx-auto py-5 px-4 md:px-8">
       <h2 className="text-3xl font-bold mb-4 text-[var(--color-primary)]">Join Our Team</h2>
       <p className="text-gray-600 mb-8">
         We’re looking for passionate individuals to help us build the future. Browse available positions and apply.

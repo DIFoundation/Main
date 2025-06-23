@@ -9,7 +9,6 @@ export default function AddJobForm() {
     title: "",
     location: "",
     type: "",
-    applyLink: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -32,8 +31,7 @@ export default function AddJobForm() {
       setFormData({
         title: "",
         location: "",
-        type: "",
-        applyLink: "",
+        type: ""
       });
     } catch (error) {
       console.error("Error posting job:", error);
@@ -77,18 +75,6 @@ export default function AddJobForm() {
           name="type"
           placeholder="e.g., Full-time, Part-time, Internship"
           value={formData.type}
-          onChange={handleChange}
-          className="w-full border rounded px-3 py-2"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-1">Link to apply</label>
-        <input
-          type="url"
-          name="applyLink"
-          placeholder="https://example.com/apply"
-          value={formData.applyLink}
           onChange={handleChange}
           className="w-full border rounded px-3 py-2"
         />
