@@ -2,8 +2,11 @@
 
 import React, { useState } from "react";
 import { Send } from "lucide-react";
+<<<<<<< HEAD
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "@/app/api/firebase";
+=======
+>>>>>>> 8d7c86bb82be9e3a09e36e25e19728c6799c3d82
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -28,6 +31,7 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     try {
+<<<<<<< HEAD
       await addDoc(collection(db, "contact_messages"), {
         ...formData,
         createdAt: serverTimestamp(),
@@ -44,6 +48,26 @@ export default function ContactPage() {
       console.error("Error sending message:", error);
       setNotSuccess(true);
       alert("Failed to send message.");
+=======
+      // Example POST request to /api/contact (replace with your actual endpoint)
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSuccess(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setNotSuccess(true);
+        console.error("Failed to submit");
+      }
+    } catch (error) {
+      console.error("Error submitting:", error);
+>>>>>>> 8d7c86bb82be9e3a09e36e25e19728c6799c3d82
     } finally {
       setIsSubmitting(false);
     }
@@ -66,8 +90,12 @@ export default function ContactPage() {
       {notSuccess && (
         <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md border border-red-200">
           Oops! Something went wrong. Please try again later.
+<<<<<<< HEAD
         </div>
       )}
+=======
+        </div>)}
+>>>>>>> 8d7c86bb82be9e3a09e36e25e19728c6799c3d82
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
