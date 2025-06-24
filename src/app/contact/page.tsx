@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { Send } from "lucide-react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/app/api/firebase";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -26,24 +28,22 @@ export default function ContactPage() {
     setIsSubmitting(true);
 
     try {
-      // Example POST request to /api/contact (replace with your actual endpoint)
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      await addDoc(collection(db, "contact_messages"), {
+        ...formData,
+        createdAt: serverTimestamp(),
       });
-
-      if (response.ok) {
-        setSuccess(true);
-        setFormData({ name: "", email: "", subject: "", message: "" });
-      } else {
-        setNotSuccess(true);
-        console.error("Failed to submit");
-      }
+      alert("Your message has been sent successfully!");
+      setSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
     } catch (error) {
-      console.error("Error submitting:", error);
+      console.error("Error sending message:", error);
+      setNotSuccess(true);
+      alert("Failed to send message.");
     } finally {
       setIsSubmitting(false);
     }
@@ -66,7 +66,8 @@ export default function ContactPage() {
       {notSuccess && (
         <div className="mb-6 p-4 bg-red-100 text-red-700 rounded-md border border-red-200">
           Oops! Something went wrong. Please try again later.
-        </div>)}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>

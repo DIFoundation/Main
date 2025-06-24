@@ -27,6 +27,7 @@ export default function Home() {
 
   return (
     <>
+      <title>Home | GoWithFund</title>
       {/* Hero Section */}
       <section className="bg-[url(/hero1.png)] bg-no-repeat w-full text-white py-16 px-4 md:px-5 rounded-xl shadow-md mt-4 flex min-h-[480px] flex-col gap-6 bg-cover bg-center items-center justify-center p-4 @[480px]:gap-8 @[480px]:rounded-lg">
         <div className="flex flex-col gap-2 text-center">
