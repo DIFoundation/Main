@@ -1,21 +1,27 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Send } from 'lucide-react';
+import React, { useState } from "react";
+import { Send } from "lucide-react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "@/app/api/firebase";
 
 export default function Volunteer() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    interest: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    interest: "",
+    message: "",
   });
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -23,34 +29,36 @@ export default function Volunteer() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.phone || !formData.interest) {
-      alert('Please fill all required fields.');
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.phone ||
+      !formData.interest
+    ) {
+      alert("Please fill all required fields.");
       return;
     }
 
+    setLoading(true);
+
     try {
-      setLoading(true);
-
-      const res = await fetch('/api/volunteer', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      await addDoc(collection(db, "volunteer_submissions"), {
+        ...formData,
+        createdAt: serverTimestamp(),
       });
-
-      if (res.ok) {
-        setSuccess(true);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          interest: '',
-          message: '',
-        });
-      } else {
-        alert('There was an error submitting your volunteer request.');
-      }
-    } catch (err) {
-      console.error('Error:', err);
+      alert("Your message has been sent successfully!");
+      setSuccess(true);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        interest: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setSuccess(false);
+      alert("Failed to send message.");
     } finally {
       setLoading(false);
     }
@@ -58,9 +66,12 @@ export default function Volunteer() {
 
   return (
     <section className="max-w-3xl mx-auto py-10 px-4 md:px-8">
-      <h2 className="text-3xl font-bold mb-4 text-[var(--color-primary)]">Become a Volunteer</h2>
+      <h2 className="text-3xl font-bold mb-4 text-[var(--color-primary)]">
+        Become a Volunteer
+      </h2>
       <p className="text-gray-600 mb-8">
-        Join us in making a difference. Fill out the form below and we’ll get in touch with you soon.
+        Join us in making a difference. Fill out the form below and we’ll get in
+        touch with you soon.
       </p>
 
       {success && (
@@ -69,9 +80,11 @@ export default function Volunteer() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <form className="space-y-5" onSubmit={handleSubmit}>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Full Name
+          </label>
           <input
             type="text"
             name="name"
@@ -83,7 +96,9 @@ export default function Volunteer() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Email
+          </label>
           <input
             type="email"
             name="email"
@@ -95,7 +110,9 @@ export default function Volunteer() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Phone Number
+          </label>
           <input
             type="tel"
             name="phone"
@@ -107,7 +124,9 @@ export default function Volunteer() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Area of Interest</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Area of Interest
+          </label>
           <select
             name="interest"
             value={formData.interest}
@@ -125,7 +144,9 @@ export default function Volunteer() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Message (optional)</label>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Message (optional)
+          </label>
           <textarea
             name="message"
             value={formData.message}
@@ -140,7 +161,9 @@ export default function Volunteer() {
           disabled={loading}
           className="w-full bg-[var(--color-primary)] text-white px-4 py-2 rounded-md font-medium hover:bg-[var(--color-primary)]/90 transition flex items-center justify-center gap-2"
         >
-          {loading ? 'Submitting...' : (
+          {loading ? (
+            "Submitting..."
+          ) : (
             <>
               <Send size={16} />
               Submit Volunteer Request

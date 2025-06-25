@@ -24,6 +24,9 @@ function Footer() {
                 <Link href="/contact" className="text-sm text-[var(--color-dark)] hover:text-black">
                     Contact
                 </Link>
+                <Link href="/admin" className="text-sm text-[var(--color-dark)] hover:text-black">
+                    Admin Panel
+                </Link>
             </div>
             <div className='flex flex-row items-center justify-between max-w-2xl gap-5 mt-4'>
                 <Link href="https://x.com./GoWithFund" className="text-sm text-[var(--color-dark)] hover:text-black">
